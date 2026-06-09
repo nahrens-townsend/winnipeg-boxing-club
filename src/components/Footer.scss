@@ -1,0 +1,11 @@
+@use "../styles/variables";
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&display=swap");
+
+.footer {
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  background-color: variables.$black;
+  z-index: 100;
+  padding: 1.5rem 2rem;
+}

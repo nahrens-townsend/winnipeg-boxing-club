@@ -1,0 +1,313 @@
+@use "../styles/variables";
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&display=swap");
+
+// ── Keyframes ─────────────────────────────────────────────────────────────────
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroRevealX {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes heroRevealY {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// ── Hero ──────────────────────────────────────────────────────────────────────
+
+.hero {
+  width: 100%;
+  height: 70vh;
+  display: grid;
+  grid-template-columns: 48fr 52fr;
+  background: variables.$black;
+  overflow: hidden;
+
+  &__top-bar {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    z-index: 10;
+
+    width: 400px;
+    height: 50px;
+    background: variables.$red;
+
+    transform: translateX(-100%); /* start off-screen (left) */
+    opacity: 0;
+
+    animation: slideIn 0.6s ease-out forwards;
+  }
+
+  // ── Content column ────────────────────────────────────────────────────────
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 7rem 4rem 7rem 5.5rem;
+    background: variables.$black;
+    position: relative;
+    z-index: 2;
+  }
+
+  // ── Eyebrow ───────────────────────────────────────────────────────────────
+
+  &__eyebrow {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: variables.$red;
+    margin: 0 0 1.25rem 0;
+    opacity: 0;
+    animation: heroFadeUp 0.55s ease 0.3s forwards;
+  }
+
+  // ── Title ─────────────────────────────────────────────────────────────────
+
+  &__title {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(5rem, 5.5vw, 10rem);
+    line-height: 0.88;
+    letter-spacing: 0.015em;
+    text-transform: uppercase;
+    margin: 0 0 2rem 0;
+    padding: 0;
+    color: variables.$white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title-primary {
+    display: block;
+    opacity: 0;
+    animation: heroFadeUp 0.6s ease 0.45s forwards;
+  }
+
+  &__title-divider {
+    display: block;
+    height: 5px;
+    width: 72%;
+    background: variables.$red;
+    margin: 0.65rem 0;
+    transform-origin: left;
+    animation: heroRevealX 0.5s cubic-bezier(0.77, 0, 0.175, 1) 0.7s both;
+  }
+
+  &__title-secondary {
+    display: block;
+    font-size: clamp(1.8rem, 3.2vw, 3.6rem);
+    color: rgba(variables.$white, 0.45);
+    letter-spacing: 0.08em;
+    opacity: 0;
+    animation: heroFadeUp 0.6s ease 0.65s forwards;
+  }
+
+  // ── Description ───────────────────────────────────────────────────────────
+
+  &__description {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 400;
+    font-size: clamp(1rem, 1.35vw, 1.2rem);
+    line-height: 1.75;
+    color: rgba(variables.$white, 0.58);
+    max-width: 600px;
+    margin: 0 0 2.5rem 0;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: heroFadeUp 0.6s ease 0.8s forwards;
+  }
+
+  // ── CTA ───────────────────────────────────────────────────────────────────
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: variables.$white;
+    background: variables.$red;
+    padding: 1rem 2.4rem;
+    opacity: 0;
+    animation: heroFadeUp 0.6s ease 0.95s forwards;
+    transition:
+      transform 0.22s ease,
+      box-shadow 0.22s ease;
+
+    &::after {
+      content: "→";
+      display: inline-block;
+      transition: transform 0.22s ease;
+    }
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 36px rgba(variables.$red, 0.5);
+
+      &::after {
+        transform: translateX(6px);
+      }
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid variables.$white;
+      outline-offset: 4px;
+    }
+  }
+
+  // ── Image column ──────────────────────────────────────────────────────────
+
+  &__image-wrap {
+    position: relative;
+    overflow: hidden;
+
+    // Gradient: pure black on the left, fading to transparent over the image
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        variables.$black 0%,
+        rgba(variables.$black, 0.55) 28%,
+        rgba(variables.$black, 0.1) 55%,
+        transparent 75%
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: grayscale(100%) contrast(1.08) brightness(0.88);
+    display: block;
+  }
+
+  // ── Tablet ───────────────────────────────────────────────────────────────
+  @media (max-width: variables.$tablet) {
+    &__top-bar {
+      top: 20px;
+      width: 100px;
+      height: 50px;
+    }
+  }
+
+  // ── Tablet ─────────────────────────────────────────────────────────
+  @media (max-width: variables.$tablet) {
+    &__content {
+      padding: 2rem;
+    }
+  }
+
+  // ── Mobile ────────────────────────────────────────────────────────────────
+
+  @media (max-width: variables.$mobile) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 50svh;
+    min-height: 50svh;
+    height: 50vh;
+
+    &__top-bar {
+      top: 20px;
+      width: 30px;
+      height: 50px;
+    }
+
+    // Stack both children in the same cell so content overlays the image
+    &__image-wrap {
+      grid-row: 1;
+      grid-column: 1;
+
+      &::after {
+        background: linear-gradient(
+          160deg,
+          rgba(variables.$black, 0.45) 0%,
+          rgba(variables.$black, 0.72) 55%,
+          rgba(variables.$black, 0.88) 100%
+        );
+      }
+    }
+
+    &__content {
+      grid-row: 1;
+      grid-column: 1;
+      z-index: 2;
+      background: transparent;
+      padding: 1.5rem 1rem;
+
+      // Switch to a horizontal accent bar
+      &::before {
+        top: 0;
+        left: 2.75rem;
+        height: 5px;
+        width: 44%;
+        transform-origin: left;
+        animation: heroRevealX 0.55s cubic-bezier(0.77, 0, 0.175, 1) 0.2s both;
+      }
+    }
+
+    &__title {
+      font-size: clamp(4rem, 15vw, 6rem);
+    }
+
+    &__title-secondary {
+      font-size: clamp(1.5rem, 5.5vw, 2.4rem);
+    }
+
+    &__title-divider {
+      width: 55%;
+    }
+
+    &__description {
+      max-width: 80%;
+      font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+    }
+  }
+}

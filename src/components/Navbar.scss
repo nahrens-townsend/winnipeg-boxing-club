@@ -1,0 +1,290 @@
+@use "../styles/variables";
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&display=swap");
+
+// ─── Navbar ───────────────────────────────────────────────────────────────────
+.navbar {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: variables.$nav-height;
+  background-color: variables.$black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  overflow: hidden;
+
+  // Subtle grid texture
+  background-image:
+    linear-gradient(rgba(variables.$red, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(variables.$red, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+
+  // ── Instagram icon ─────────────────────────────────────────────────────────
+  &__instagram {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    color: variables.$white;
+    font-size: 1.65rem;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+    z-index: 10;
+
+    &:hover {
+      color: variables.$red;
+      transform: scale(1.18) rotate(-6deg);
+    }
+
+    &:focus-visible {
+      outline: 2px solid variables.$red;
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+  }
+
+  // ── Desktop content column ─────────────────────────────────────────────────
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    padding: 0 2rem;
+  }
+
+  // ── Logo ───────────────────────────────────────────────────────────────────
+  &__logo-link {
+    display: block;
+    line-height: 0;
+  }
+
+  &__logo {
+    height: 130px;
+    width: auto;
+    object-fit: contain;
+    transition:
+      filter 0.3s ease,
+      transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.025);
+    }
+  }
+
+  // ── Nav links ──────────────────────────────────────────────────────────────
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__link {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: variables.$white;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.2s ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background-color: variables.$red;
+      transition: width 0.25s ease;
+    }
+
+    &:hover {
+      color: variables.$red;
+
+      &::after {
+        width: 100%;
+      }
+    }
+
+    &--active {
+      color: variables.$red;
+
+      &::after {
+        width: 100%;
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid variables.$red;
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+  }
+
+  // ── Divider ────────────────────────────────────────────────────────────────
+  &__divider {
+    width: 50%;
+    height: 6px;
+    background: linear-gradient(variables.$red);
+    flex-shrink: 0;
+  }
+
+  // ── Tagline ────────────────────────────────────────────────────────────────
+  &__tagline {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: rgba(variables.$white, 0.78);
+    margin: 0;
+    text-align: center;
+  }
+
+  // ── Mobile burger ──────────────────────────────────────────────────────────
+  &__burger {
+    display: none;
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 200;
+
+    span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background-color: variables.$white;
+      transition:
+        transform 0.28s ease,
+        opacity 0.28s ease,
+        background-color 0.2s ease;
+      transform-origin: center;
+    }
+
+    &--open {
+      span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+        background-color: variables.$red;
+      }
+      span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+        background-color: variables.$red;
+      }
+    }
+  }
+
+  // ── Mobile overlay ─────────────────────────────────────────────────────────
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    background-color: variables.$black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 150;
+  }
+
+  &__overlay-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.25rem;
+  }
+
+  &__overlay-link {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 2.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: variables.$white;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.2s ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background-color: variables.$red;
+      transition: width 0.25s ease;
+    }
+
+    &:hover {
+      color: variables.$red;
+      &::after {
+        width: 100%;
+      }
+    }
+
+    &.active {
+      color: variables.$red;
+    }
+  }
+}
+
+// ─── Mobile breakpoint ────────────────────────────────────────────────────────
+@media (max-width: variables.$mobile) {
+  .navbar {
+    height: auto;
+    min-height: 150px;
+    padding: 0.75rem 0;
+    background-image: none;
+
+    &__content {
+      gap: 0.5rem;
+      padding: 0 1rem;
+    }
+
+    &__logo {
+      height: 58px;
+    }
+
+    &__nav,
+    &__divider,
+    &__tagline {
+      display: none;
+    }
+
+    &__instagram {
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.45rem;
+      left: 2rem;
+      right: auto;
+
+      &:hover {
+        transform: translateY(-50%) scale(1.18) rotate(-6deg);
+      }
+    }
+
+    &__burger {
+      display: flex;
+    }
+  }
+}

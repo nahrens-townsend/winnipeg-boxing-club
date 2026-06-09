@@ -1,0 +1,67 @@
+@use "./variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: min(100% - 2rem, var(--max-width));
+  margin-inline: auto;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: variables.$white;
+  background: variables.$red;
+  padding: 1rem 2.4rem;
+  opacity: 0;
+  animation: heroFadeUp 0.6s ease 0.95s forwards;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+  cursor: pointer;
+
+  &__small {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 36px rgba(variables.$red, 0.5);
+
+    &::after {
+      transform: translateX(6px);
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid variables.$white;
+    outline-offset: 4px;
+  }
+}
