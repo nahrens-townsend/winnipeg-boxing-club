@@ -249,7 +249,7 @@
 }
 
 // ─── Mobile breakpoint ────────────────────────────────────────────────────────
-@media (max-width: variables.$mobile) {
+@media (max-width: variables.$tablet) {
   .navbar {
     height: auto;
     min-height: 150px;

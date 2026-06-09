@@ -181,7 +181,7 @@
 
   // ── Mobile ──────────────────────────────────────────────────────────────────
 
-  @media (max-width: variables.$mobile) {
+  @media (max-width: variables.$tablet) {
     padding: 4rem 0 0;
 
     &__header {
