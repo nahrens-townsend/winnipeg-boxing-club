@@ -15,9 +15,6 @@ export default function Hero() {
           than a boxing gym. Whether your goal is total body conditioning or
           learning to defend yourself — we have the class for you.
         </p>
-        <a href="#contact" className="hero__cta">
-          Start Training
-        </a>
       </div>
 
       <div className="hero__image-wrap">

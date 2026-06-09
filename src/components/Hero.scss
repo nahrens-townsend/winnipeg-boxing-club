@@ -74,7 +74,7 @@
   &__content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     padding: 7rem 4rem 7rem 5.5rem;
     background: variables.$black;
@@ -150,52 +150,6 @@
     letter-spacing: 0.02em;
     opacity: 0;
     animation: heroFadeUp 0.6s ease 0.8s forwards;
-  }
-
-  // ── CTA ───────────────────────────────────────────────────────────────────
-
-  &__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    font-family: "Barlow Condensed", sans-serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: variables.$white;
-    background: variables.$red;
-    padding: 1rem 2.4rem;
-    opacity: 0;
-    animation: heroFadeUp 0.6s ease 0.95s forwards;
-    transition:
-      transform 0.22s ease,
-      box-shadow 0.22s ease;
-
-    &::after {
-      content: "→";
-      display: inline-block;
-      transition: transform 0.22s ease;
-    }
-
-    &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 36px rgba(variables.$red, 0.5);
-
-      &::after {
-        transform: translateX(6px);
-      }
-    }
-
-    &:active {
-      transform: translateY(-1px);
-    }
-
-    &:focus-visible {
-      outline: 2px solid variables.$white;
-      outline-offset: 4px;
-    }
   }
 
   // ── Image column ──────────────────────────────────────────────────────────
