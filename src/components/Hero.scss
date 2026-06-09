@@ -250,9 +250,9 @@
 
   @media (max-width: variables.$mobile) {
     grid-template-columns: 1fr;
-    grid-template-rows: 50svh;
-    min-height: 50svh;
-    height: 50vh;
+    grid-template-rows: 65vh;
+    min-height: 65vh;
+    height: 65vh;
 
     &__top-bar {
       top: 20px;

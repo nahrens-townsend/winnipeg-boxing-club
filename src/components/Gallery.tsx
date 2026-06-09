@@ -18,7 +18,7 @@ const images = [
 export default function Gallery() {
   return (
     <section className="gallery">
-      <div className="about__header">
+      <div className="gallery__header">
         <h2 className="gallery__title">Gallery</h2>
 
         <div className="gallery__divider" />
