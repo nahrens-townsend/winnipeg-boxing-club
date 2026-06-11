@@ -1,0 +1,261 @@
+@use "../styles/variables";
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&display=swap");
+
+// ── Keyframes ─────────────────────────────────────────────────────────────────
+
+@keyframes caterFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes caterRevealX {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes caterImgRise {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0% 0 0 0);
+  }
+}
+
+// ── Section ───────────────────────────────────────────────────────────────────
+
+.cater {
+  width: 100%;
+  background: variables.$black;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  min-height: 700px;
+
+  &__top-bar {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    z-index: 10;
+
+    width: 150px;
+    height: 50px;
+    background: variables.$red;
+
+    transform: translateX(-100%); /* start off-screen (left) */
+    opacity: 0;
+
+    animation: slideIn 0.6s ease-out forwards;
+  }
+
+  // ── Left: Content ──────────────────────────────────────────────────────────
+
+  &__content {
+    padding: 6rem 5.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 1px;
+      height: 100%;
+      background: rgba(variables.$white, 0.08);
+    }
+  }
+
+  &__eyebrow {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: variables.$red;
+    margin-bottom: 1.6rem;
+    display: block;
+    opacity: 0;
+
+    .cater--visible & {
+      animation: caterFadeUp 0.5s ease 0.1s forwards;
+    }
+  }
+
+  &__title {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(3rem, 5.5vw, 10rem);
+    line-height: 0.88;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+    color: variables.$white;
+    margin: 0 0 2.2rem;
+    padding: 0;
+    opacity: 0;
+
+    .cater--visible & {
+      animation: caterFadeUp 0.65s ease 0.2s forwards;
+    }
+  }
+
+  &__divider {
+    height: 4px;
+    width: 72px;
+    background: variables.$red;
+    transform-origin: left;
+    margin-bottom: 2rem;
+
+    .cater--visible & {
+      animation: caterRevealX 0.5s cubic-bezier(0.77, 0, 0.175, 1) 0.42s both;
+    }
+  }
+
+  &__subtitle {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.05rem, 1.5vw, 1.45rem);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(variables.$white, 0.7);
+    margin: 0 0 1.6rem;
+    padding: 0;
+    opacity: 0;
+
+    .cater--visible & {
+      animation: caterFadeUp 0.6s ease 0.5s forwards;
+    }
+  }
+
+  &__desc {
+    font-family: "Barlow Condensed", sans-serif;
+    font-weight: 400;
+    font-size: clamp(0.95rem, 1.1vw, 1.08rem);
+    line-height: 1.82;
+    letter-spacing: 0.025em;
+    color: rgba(variables.$white, 0.45);
+    max-width: 500px;
+    margin: 0;
+    opacity: 0;
+
+    .cater--visible & {
+      animation: caterFadeUp 0.6s ease 0.6s forwards;
+    }
+  }
+
+  // ── Right: Images ──────────────────────────────────────────────────────────
+
+  &__images {
+    display: flex;
+    gap: 5px;
+    align-items: stretch;
+  }
+
+  &__img-wrap {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    opacity: 0;
+
+    .cater--visible & {
+      animation: caterImgRise 0.75s cubic-bezier(0.22, 1, 0.36, 1)
+        var(--img-delay, 0.3s) forwards;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: variables.$red;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    &:hover {
+      &::after {
+        transform: scaleX(1);
+      }
+
+      .cater__img {
+        filter: grayscale(0);
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(1);
+    transform: scale(1);
+    transition:
+      filter 0.5s ease,
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  // ── Tablet ─────────────────────────────────────────────────────────────────
+
+  @media (max-width: variables.$tablet) {
+    grid-template-columns: 1fr;
+    min-height: auto;
+
+    &__top-bar {
+      top: 50px;
+      width: 30px;
+      height: 50px;
+    }
+
+    &__content {
+      padding: 4.5rem 1.5rem 3rem;
+
+      &::after {
+        display: none;
+      }
+    }
+
+    &__desc {
+      max-width: 100%;
+    }
+
+    &__images {
+      height: 420px;
+    }
+  }
+
+  // ── Mobile ─────────────────────────────────────────────────────────────────
+
+  @media (max-width: variables.$mobile) {
+    &__content {
+      padding: 3.5rem 1.25rem 2.5rem;
+    }
+
+    &__images {
+      height: 280px;
+      gap: 3px;
+    }
+  }
+}

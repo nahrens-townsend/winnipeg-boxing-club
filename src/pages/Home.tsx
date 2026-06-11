@@ -6,6 +6,7 @@ import IntroAnimation from "../components/IntroAnimation";
 import About from "../components/About";
 import TrainHard from "../components/TrainHard";
 import Gallery from "../components/Gallery";
+import Cater from "../components/Cater";
 
 export default function Home() {
   const [showAnimation, setShowAnimation] = useState(true);
@@ -26,6 +27,7 @@ export default function Home() {
         <Hero />
         <TrainHard />
         <About />
+        <Cater />
         <Gallery />
         <Footer />
       </div>
